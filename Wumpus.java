@@ -95,6 +95,7 @@ public class Wumpus extends JPanel {
             int room;
             do {
                 room = rand.nextInt(rooms.length);
+                //close = tooClose(room);
             } while (tooClose(room) || hazards[room].contains(values[ord]));
 
             if (ord == 0)
@@ -130,23 +131,7 @@ public class Wumpus extends JPanel {
             gameOver = true;
 
         } else if (set.contains(Hazard.Bat)) {
-            messages.add("a bat dropped you in a random room");
-
-            // teleport, but avoid 2 teleports in a row
-            do {
-                currRoom = rand.nextInt(rooms.length);
-            } while (hazards[currRoom].contains(Hazard.Bat));
-
-            // relocate the bat, but not to the player room or a room with a bat
-            set.remove(Hazard.Bat);
-            int newRoom;
-            do {
-                newRoom = rand.nextInt(rooms.length);
-            } while (newRoom == currRoom || hazards[newRoom].contains(Hazard.Bat));
-            hazards[newRoom].add(Hazard.Bat);
-
-            // re-evaluate
-            situation();
+            extracted(set);
 
         } else {
 
@@ -157,6 +142,26 @@ public class Wumpus extends JPanel {
             }
         }
     }
+
+	private void extracted(Set<Hazard> set) {
+		messages.add("a bat dropped you in a random room");
+
+		// teleport, but avoid 2 teleports in a row
+		do {
+		    currRoom = rand.nextInt(rooms.length);
+		} while (hazards[currRoom].contains(Hazard.Bat));
+
+		// relocate the bat, but not to the player room or a room with a bat
+		set.remove(Hazard.Bat);
+		int newRoom;
+		do {
+		    newRoom = rand.nextInt(rooms.length);
+		} while (newRoom == currRoom || hazards[newRoom].contains(Hazard.Bat));
+		hazards[newRoom].add(Hazard.Bat);
+
+		// re-evaluate
+		situation();
+	}
 
     void shoot(int room) {
         if (hazards[room].contains(Hazard.Wumpus)) {
@@ -294,4 +299,3 @@ public class Wumpus extends JPanel {
     {10, 2, 12}, {13, 19, 11}, {14, 3, 12}, {5, 15, 13}, {14, 16, 19},
     {6, 17, 15}, {16, 8, 18}, {19, 10, 17}, {15, 12, 18}};
 }
-
