@@ -131,7 +131,7 @@ public class Wumpus extends JPanel {
             gameOver = true;
 
         } else if (set.contains(Hazard.Bat)) {
-            extracted(set);
+            activateBat(set);
 
         } else {
 
@@ -143,7 +143,7 @@ public class Wumpus extends JPanel {
         }
     }
 
-	private void extracted(Set<Hazard> set) {
+	private void activateBat(Set<Hazard> set) {
 		messages.add("a bat dropped you in a random room");
 
 		// teleport, but avoid 2 teleports in a row
