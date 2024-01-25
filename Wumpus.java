@@ -286,19 +286,6 @@ public class Wumpus extends JPanel {
         drawMessage(g);
     }
 
-    public static void main(String[] args) {
-        invokeLater(() -> {
-            JFrame f = new JFrame();
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            f.setTitle("Hunt The Wumpus");
-            f.setResizable(false);
-            f.add(new Wumpus(), BorderLayout.CENTER);
-            f.pack();
-            f.setLocationRelativeTo(null);
-            f.setVisible(true);
-        });
-    }
-
     int[][] rooms = {{334, 20}, {609, 220}, {499, 540}, {169, 540}, {62, 220},
     {169, 255}, {232, 168}, {334, 136}, {435, 168}, {499, 255}, {499, 361},
     {435, 447}, {334, 480}, {232, 447}, {169, 361}, {254, 336}, {285, 238},
