@@ -89,14 +89,13 @@ public class Wumpus extends JPanel {
             hazards[i] = EnumSet.noneOf(Hazard.class);
 
         // hazards can share rooms (unless they are identical)
-        boolean close = tooClose(room);
         int[] ordinals = {0, 1, 1, 1, 2, 2};
         Hazard[] values = Hazard.values();
         for (int ord : ordinals) {
             int room;
             do {
                 room = rand.nextInt(rooms.length);
-            } while (close || hazards[room].contains(values[ord]));
+            } while (tooClose(room) || hazards[room].contains(values[ord]));
 
             if (ord == 0)
                 wumpusRoom = room;
